@@ -1,11 +1,13 @@
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram import Router,F
+import kb
 router = Router()
 
 @router.message(CommandStart())
 async def start(message: Message):
-    await message.answer("Hello my friend")
+    await message.answer("Hello my friend", reply_markup=kb.main)
+
 
 @router.message(Command('help'))
 async def help_cmd(message: Message):
