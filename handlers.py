@@ -1,5 +1,5 @@
 from aiogram.filters import CommandStart, Command
-from aiogram.types import Message
+from aiogram.types import Message,CallbackQuery
 from aiogram import Router,F
 import kb
 router = Router()
@@ -18,5 +18,11 @@ async def f_reply(message:Message):
     await message.reply("Nothing much G \n Choose Priority", reply_markup=await kb.pr())
 
 @router.message(F.text =='Set Reminder')
-async def f_reply(message:Message):
+async def r_reply(message:Message):
     await message.reply("Choose Time", reply_markup=kb.date)
+
+@router.callback_query(F.data == "exact")
+async def yday(callback: CallbackQuery):
+    await callback.answer('')
+    await callback.message.edit_text("Choose EXACT TIME", reply_markup= await kb.time())
+    
